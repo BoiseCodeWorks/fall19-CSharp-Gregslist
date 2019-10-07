@@ -2,12 +2,11 @@ namespace gregslist.Models
 {
     public abstract class Listing
     {
-        public string Condition { get; set; }
-        public string ImgUrl { get; set; }
+        // public string Condition { get; set; }
+        // public string ImgUrl { get; set; }
         public string SubCategory { get; set; }
-        public int Year { get; set; }
+        // public int Year { get; set; }
         public string Description { get; set; }
-        public double Price { get; set; }
 
         //NOTE creates a default method that can be overriden
         public virtual string GetTemplate()
@@ -15,7 +14,6 @@ namespace gregslist.Models
             string template = $@"
 Image: {ImgUrl}
 Year: {Year}
-Price: {Price:c}
 Description: {Description}
 Condition: {Condition}
 SubCategory: {SubCategory}
@@ -35,7 +33,7 @@ press any key to return to the main menu!";
             SubCategory = subcat;
             Year = year;
             Description = desc;
-            Price = price;
+            // Price = price;
         }
     }
 }

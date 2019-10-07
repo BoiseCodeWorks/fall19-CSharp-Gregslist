@@ -1,9 +1,12 @@
+using gregslist.Interfaces;
+
 namespace gregslist.Models
 {
-    public class Car : Manufactured
+    public class Car : Manufactured, IPurchasable
     {
         public string Fuel { get; set; }
-
+        public float Price { get; set; }
+        public string PaymentMethods { get; set; }
 
         public bool HaveMechanicChecked()
         {
@@ -19,7 +22,6 @@ Model: {Model}
 Fuel: {Fuel}
 Image: {ImgUrl}
 Year: {Year}
-Price: {Price:c}
 Description: {Description}
 Condition: {Condition}
 SubCategory: {SubCategory}
@@ -28,11 +30,13 @@ press any key to return to the main menu!
             ";
         }
 
-
-
-
-
-
+        public void Bid(float price)
+        {
+            if (price > 99)
+            {
+                Price += price;
+            }
+        }
 
         public Car(string make, string model, int year, string desc, double price, string condition, string imgurl, string subcat, string fuel) : base(make, model, year, desc, price, condition, imgurl, subcat)
         {
