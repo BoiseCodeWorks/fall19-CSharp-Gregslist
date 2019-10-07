@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using gregslist.Interfaces;
 using gregslist.Models;
 
 namespace gregslist.Services
@@ -7,6 +8,8 @@ namespace gregslist.Services
     public class CarService
     {
         public List<Listing> Listings { get; private set; }
+
+        public List<IPurchasable> ForSale { get; set; }
         public List<string> Messages { get; set; }
 
         public void Setup()
@@ -19,6 +22,8 @@ namespace gregslist.Services
             Furniture couch = new Furniture(2011, "its a brown leather couch", 100, "Its very cracked and warn", "n______n", "Couch");
 
             Listings.AddRange(new Listing[] { ford, honda, toyota, tracker, couch });
+
+            ForSale.AddRange(new IPurchasable[] { ford, couch });
         }
 
         internal void GetCars(int index)
@@ -46,10 +51,31 @@ namespace gregslist.Services
             for (int i = 0; i < Listings.Count; i++)
             {
                 Listing c = Listings[i];
-                Messages.Add($"{i + 1}: {c.ImgUrl} - {c.Price}");
+                Messages.Add($"{i + 1}");
             }
             Messages.Add("Type a number to see details or Q to quit");
         }
+
+
+        public void GetPurchasables()
+        {
+            Messages.Add("Available to Buy");
+            for (int i = 0; i < ForSale.Count; i++)
+            {
+                IPurchasable forSale = ForSale[i];
+                Messages.Add($"{i + 1}");
+
+                IPhysical carSale = forSale as IPhysical;
+                if (carSale != null)
+                {
+                    carSale.Make;
+                }
+
+            }
+            Messages.Add("Type a number to see details or Q to quit");
+        }
+
+
 
         public CarService()
         {
